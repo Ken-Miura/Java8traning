@@ -13,7 +13,6 @@ public final class DirectoryFinder {
 		if (!directory.isDirectory()) {
 			throw new IllegalArgumentException("arg \"directory\" cannot be file");
 		}
-		Set<File> resultSet =  new HashSet<>();
 		
 		// ƒ‰ƒ€ƒ_Ž®”Å
 		// File[] subDirectories = directory.listFiles((file)->file.isDirectory());
@@ -23,10 +22,11 @@ public final class DirectoryFinder {
 		if (subDirectories == null) {
 			throw new IOException("Failed to list up directories in " + directory);
 		}
+		final Set<File> foundDirectories =  new HashSet<>();
 		for (final File subDirectory: subDirectories) {
-			resultSet.add(subDirectory);
-			resultSet.addAll(findDirectoryRecursively(subDirectory));
+			foundDirectories.add(subDirectory);
+			foundDirectories.addAll(findDirectoryRecursively(subDirectory));
 		}
-		return resultSet;
+		return foundDirectories;
 	}
 }

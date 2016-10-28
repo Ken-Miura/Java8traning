@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 public class DirectoryFinderTest {
 
@@ -21,55 +22,77 @@ public class DirectoryFinderTest {
 	public final ExpectedException exception = ExpectedException.none();
 	
 	@Test
-	public void findDirectoryRecursively_nullAsParam_thrownNullPointerException() throws IOException {
+	public void findDirectoryRecursively_throwsNullPointerExceptionIfNullIsPassed() throws IOException {
 		exception.expect(NullPointerException.class);
 		exception.expectMessage("directory must not be null");
 		DirectoryFinder.findDirectoryRecursively(null);
 	}
 	
 	@Test
-	public void findDirectoryRecursively_fileAsParam_IllegalArgumentException() throws IOException {
+	public void findDirectoryRecursively_throwsIllegalArgumentExceptionIfFileIsPassed() throws IOException {
 		exception.expect(IllegalArgumentException.class);
 		exception.expectMessage("arg \"directory\" cannot be file");
 		final File file = tempFolder.newFile();
+		
 		DirectoryFinder.findDirectoryRecursively(file);
 	}
 	
 	@Test
-	public void findDirectoryRecursively_emptyDirectoryAsParam_emptySet() throws IOException {
-		final Set<File> expected = new HashSet<>();
+	public void findDirectoryRecursively_returnsEmptySetIfEmptyDirectoyIsPassed() throws IOException {
+		final Set<File> emptySet = new HashSet<>();
 		final File emptyDirectory = tempFolder.newFolder();
-		final Set<File> actual = DirectoryFinder.findDirectoryRecursively(emptyDirectory);
-		assertEquals(expected, actual);
+		
+		final Set<File> result = DirectoryFinder.findDirectoryRecursively(emptyDirectory);
+		
+		assertThat(result, is(emptySet));
 	}
 	
 	@Test
-	public void findDirectoryRecursively_directoryWhichHasOneDirectoryAsParam_SetWhichHasOneDirectory() throws IOException {
-		final Set<File> expected = new HashSet<>();
+	public void findDirectoryRecursively_returnsSetIncludingOneDirectoryIfOneDirectoryIsPassed() throws IOException {
+		final Set<File> setIncludingOneDirectory = new HashSet<>();
 		final File directory = tempFolder.newFolder("level1");
-		expected.add(tempFolder.newFolder("level1", "level2"));
-		final Set<File> actual = DirectoryFinder.findDirectoryRecursively(directory);
-		assertEquals(expected, actual);
+		setIncludingOneDirectory.add(tempFolder.newFolder("level1", "level2"));
+		
+		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
+		
+		assertThat(result, is(setIncludingOneDirectory));
 	}
 	
 	@Test
-	public void findDirectoryRecursively_directoryWhichHasOneDirectoryAndOneFileAsParam_SetWhichHasOneDirectory() throws IOException {
-		final Set<File> expected = new HashSet<>();
-		final File directory = tempFolder.newFolder("level1");
-		expected.add(tempFolder.newFolder("level1", "level2"));
-		tempFolder.newFile("level1" + File.separator + "tmp");
-		final Set<File> actual = DirectoryFinder.findDirectoryRecursively(directory);
-		assertEquals(expected, actual);
+	public void findDirectoryRecursively_returnsSetIncludingOneDirectoryIfOneDirectoryAndOneFileArePassed() throws IOException {
+		final Set<File> setIncludingOneDirectory = new HashSet<>();
+		final File directory = tempFolder.newFolder("root");
+		setIncludingOneDirectory.add(tempFolder.newFolder("root", "level1"));
+		tempFolder.newFile("root" + File.separator + "tmp");
+		
+		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
+		
+		assertThat(result, is(setIncludingOneDirectory));
 	}
 	
 	@Test
-	public void findDirectoryRecursively_directoryWhichHasTwoDirectoriesAsParam_SetWhichHasTwoDirectories() throws IOException {
-		final Set<File> expected = new HashSet<>();
-		final File directory = tempFolder.newFolder("level1");
-		expected.add(tempFolder.newFolder("level1", "level2"));
-		expected.add(tempFolder.newFolder("level1", "level2", "level3"));
-		final Set<File> actual = DirectoryFinder.findDirectoryRecursively(directory);
-		assertEquals(expected, actual);
+	public void findDirectoryRecursively_returnsSetIncludingTwoDirectoriesIfTwoHierarichicalDirectoriesArePassed() throws IOException {
+		final Set<File> setIncludingTwoDirectories = new HashSet<>();
+		final File directory = tempFolder.newFolder("root");
+		setIncludingTwoDirectories.add(tempFolder.newFolder("root", "level1"));
+		setIncludingTwoDirectories.add(tempFolder.newFolder("root", "level1", "level2"));
+		
+		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
+		
+		assertThat(result, is(setIncludingTwoDirectories));
+	}
+	
+	@Test
+	public void findDirectoryRecursively_returnsSetIncludingThreeDirectoriesIfThreeHierarichicalDirectoriesArePassed() throws IOException {
+		final Set<File> setIncludingThreeDirectories = new HashSet<>();
+		final File directory = tempFolder.newFolder("root");
+		setIncludingThreeDirectories.add(tempFolder.newFolder("root", "level1"));
+		setIncludingThreeDirectories.add(tempFolder.newFolder("root", "level1", "level2"));
+		setIncludingThreeDirectories.add(tempFolder.newFolder("root", "level1", "level2", "level3"));
+		
+		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
+		
+		assertThat(result, is(setIncludingThreeDirectories));
 	}
 
 }

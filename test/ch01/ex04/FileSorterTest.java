@@ -8,8 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertArrayEquals;
 
 public class FileSorterTest {
 
@@ -54,9 +53,7 @@ public class FileSorterTest {
 		
 		FileSorter.sortFile(testedFiles);
 		
-		for (int i=0; i<filesSortedByName.length; i++) {
-			assertThat(testedFiles[i], is(filesSortedByName[i]));	
-		}
+		assertArrayEquals(filesSortedByName, testedFiles);
 	}
 	
 	@Test
@@ -76,9 +73,7 @@ public class FileSorterTest {
 		
 		FileSorter.sortFile(testedDirectories);
 		
-		for (int i=0; i<directoriesSortedByName.length; i++) {
-			assertThat(testedDirectories[i], is(directoriesSortedByName[i]));	
-		}
+		assertArrayEquals(directoriesSortedByName, testedDirectories);
 	}
 	
 	@Test
@@ -95,9 +90,7 @@ public class FileSorterTest {
 		
 		FileSorter.sortFile(testedDirectoryAndFile);
 		
-		for (int i=0; i<directoryAndFileSortedByType.length; i++) {
-			assertThat(testedDirectoryAndFile[i], is(directoryAndFileSortedByType[i]));	
-		}
+		assertArrayEquals(directoryAndFileSortedByType, testedDirectoryAndFile);
 	}
 	
 	@Test
@@ -120,9 +113,7 @@ public class FileSorterTest {
 		
 		FileSorter.sortFile(testedDirectoriesAndFiles);
 		
-		for (int i=0; i<directoriesAndFilesSortedByTypeAndName.length; i++) {
-			assertThat(testedDirectoriesAndFiles[i], is(directoriesAndFilesSortedByTypeAndName[i]));	
-		}
+		assertArrayEquals(directoriesAndFilesSortedByTypeAndName, testedDirectoriesAndFiles);
 	}
 	
 }

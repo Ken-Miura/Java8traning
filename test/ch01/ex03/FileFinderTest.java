@@ -10,8 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 
 public class FileFinderTest {
 
@@ -61,7 +60,7 @@ public class FileFinderTest {
 		
 		Set<File> result = FileFinder.findFile(tempFolder.getRoot(), "");
 		
-		assertThat(result, is(allExistingFiles));
+		assertEquals(allExistingFiles, result);
 	}
 	
 	@Test
@@ -79,7 +78,7 @@ public class FileFinderTest {
 		
 		Set<File> result = FileFinder.findFile(tempFolder.getRoot(), ".txt");
 		
-		assertThat(result, is(specifiedExtentionFiles));
+		assertEquals(specifiedExtentionFiles, result);
 	}
 	
 	// for NOT recursively test
@@ -92,6 +91,6 @@ public class FileFinderTest {
 		
 		Set<File> result = FileFinder.findFile(tempFolder.getRoot(), ".txt");
 		
-		assertThat(result, is(filesInParentDirectory));
+		assertEquals(filesInParentDirectory, result);
 	}
 }

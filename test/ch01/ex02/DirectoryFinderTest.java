@@ -11,8 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 
 public class DirectoryFinderTest {
 
@@ -44,7 +43,7 @@ public class DirectoryFinderTest {
 		
 		final Set<File> result = DirectoryFinder.findDirectoryRecursively(emptyDirectory);
 		
-		assertThat(result, is(emptySet));
+		assertEquals(emptySet, result);
 	}
 	
 	@Test
@@ -55,7 +54,7 @@ public class DirectoryFinderTest {
 		
 		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
 		
-		assertThat(result, is(setIncludingOneDirectory));
+		assertEquals(setIncludingOneDirectory, result);
 	}
 	
 	@Test
@@ -67,7 +66,7 @@ public class DirectoryFinderTest {
 		
 		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
 		
-		assertThat(result, is(setIncludingOneDirectory));
+		assertEquals(setIncludingOneDirectory, result);
 	}
 	
 	@Test
@@ -79,7 +78,7 @@ public class DirectoryFinderTest {
 		
 		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
 		
-		assertThat(result, is(setIncludingTwoDirectories));
+		assertEquals(setIncludingTwoDirectories, result);
 	}
 	
 	@Test
@@ -92,7 +91,7 @@ public class DirectoryFinderTest {
 		
 		final Set<File> result = DirectoryFinder.findDirectoryRecursively(directory);
 		
-		assertThat(result, is(setIncludingThreeDirectories));
+		assertEquals(setIncludingThreeDirectories, result);
 	}
 
 }

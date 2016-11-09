@@ -35,7 +35,7 @@ public class Collection2Test {
 		}
 	}
 	
-	// テスト用に利用するクラス
+	// 繝�繧ｹ繝育畑縺ｫ蛻ｩ逕ｨ縺吶ｋ繧ｯ繝ｩ繧ｹ
 	private static class ArrayList2<E> implements Collection2<E> {
 
 		private final List<E> list = new ArrayList<>();

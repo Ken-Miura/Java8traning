@@ -9,19 +9,19 @@ public final class LamdaExpCaptureTest {
 		String[] names = {"Peter", "Paul", "Marry"};
 		List<Runnable> runners = new ArrayList<>();
 		
-		// Šg’£for
-		//@capture‚·‚éname‚ÍÀ¿“Ifinal‚È‚Ì‚Å³“–‚ÈƒR[ƒhB‚»‚ê‚¼‚ê"Peter", "Paul", "Marry"‚ªcapture‚³‚ê‚é
+		// æ‹¡å¼µfor
+		// captureã™ã‚‹nameã¯å®Ÿè³ªçš„finalãªã®ã§æ­£å½“ãªã‚³ãƒ¼ãƒ‰ã€‚ãã‚Œãã‚Œ"Peter", "Paul", "Marry"ãŒcaptureã•ã‚Œã‚‹
 		for (String name: names) 
 			runners.add(()->System.out.println(name));
 		
-		// Šg’£for‚Ì“WŠJ
+		// æ‹¡å¼µforã®å±•é–‹
 		//List<String> nameList = Arrays.asList(names); 
 		//for (Iterator<String> it = nameList.iterator(); it.hasNext();) {
 		//	String name = it.next();
 		//	runners.add(()->System.out.println(name));	
 		//}
 		
-		//@’Êí‚Ìfor->ƒLƒƒƒvƒ`ƒƒ‚·‚éi‚ªÀ¿“Ifinal‚Å‚È‚¢‚Ì‚ÅƒRƒ“ƒpƒCƒ‹ƒGƒ‰[‚Æ‚È‚é
+		// é€šå¸¸ã®for->ã‚­ãƒ£ãƒ—ãƒãƒ£ã™ã‚‹iãŒå®Ÿè³ªçš„finalã§ãªã„ã®ã§ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹
 		//for (int i=0; i<names.length; i++) 
 		//	runners.add(()->System.out.println(names[i]));
 		

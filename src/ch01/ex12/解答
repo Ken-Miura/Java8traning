@@ -1,5 +1,5 @@
-Java7�ȑO����Java8�Ɉڍs�����ۂɃR���p�C���G���[�ɂȂ�V�i���I
-Java7�ȑO��Collection�Ƒ��ɖ߂�l�݂̂��قȂ�stream���`�����C���^�[�t�F�[�X������(�܂��̓N���X���p������)�����N���X���������ꍇ�AJava8�ŃR���p�C���G���[�ƂȂ�B
+Java7以前からJava8に移行した際にコンパイルエラーになるシナリオ
+Java7以前でCollectionと他に戻り値のみが異なるstreamを定義したインターフェースを実装(またはクラスを継承した)したクラスがあった場合、Java8でコンパイルエラーとなる。
 
-�o�C�i���݊����ɂ���
-JVM�͖߂�l���܂߂ČĂяo�����\�b�h�����߂邽�߁A�Â��R�[�h��Java8�Ŗ��Ȃ����삷��
+バイナリ互換性について
+JVMは戻り値も含めて呼び出すメソッドを決めるため、古いコードもJava8で問題なく動作する

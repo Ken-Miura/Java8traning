@@ -14,9 +14,9 @@ public final class DirectoryFinder {
 			throw new IllegalArgumentException("arg \"directory\" cannot be file");
 		}
 		
-		// ƒ‰ƒ€ƒ_®”Å
+		// ãƒ©ãƒ ãƒ€å¼ç‰ˆ
 		// File[] subDirectories = directory.listFiles((file)->file.isDirectory());
-		// ƒƒ\ƒbƒhQÆ”Å
+		// ãƒ¡ã‚½ãƒƒãƒ‰å‚ç…§ç‰ˆ
 		File[] subDirectories = directory.listFiles(File::isDirectory);
 		
 		if (subDirectories == null) {

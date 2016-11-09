@@ -12,7 +12,7 @@ public final class FileSorter {
 			Objects.requireNonNull(file, "file must not be null");	
 		}
 		Arrays.sort(files, (file1, file2)->{
-			// 両方ファイルか両方ディレクトリかの検査
+			// 荳｡譁ｹ繝輔ぃ繧､繝ｫ縺倶ｸ｡譁ｹ繝�繧｣繝ｬ繧ｯ繝医Μ縺九�ｮ隱ｿ譟ｻ
 			if (file1.isDirectory() == file2.isDirectory()) {
 				return file1.compareTo(file2);
 			}

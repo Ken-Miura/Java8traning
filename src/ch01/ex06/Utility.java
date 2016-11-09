@@ -1,6 +1,6 @@
 package ch01.ex06;
 
-// RunnableEx‚Ì‘ã‚í‚è‚ÉCallable<Void>‚Å‚Í‚¢‚¯‚È‚¢——R:@Callable<Void>‚¾‚Æcall‚Ì•Ô‚è’l‚ÌŒ^‚Æ‚µ‚ÄVoid‚ªw’è‚³‚ê‚Ä‚¢‚é‚Ì‚ÅAreturn null;‚Ì‚æ‚¤‚È\•¶‚ªÅŒã‚É•K—v‚É‚È‚é‚½‚ß
+// RunnableExã®ä»£ã‚ã‚Šã«Callable<Void>ã§ã¯ã„ã‘ãªã„ç†ç”±:ã€€Callable<Void>ã ã¨callã®è¿”ã‚Šå€¤ã®å‹ã¨ã—ã¦VoidãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã®ã§ã€return null;ã®ã‚ˆã†ãªæ§‹æ–‡ãŒæœ€å¾Œã«å¿…è¦ã«ãªã‚‹ãŸã‚
 public final class Utility {
 
 	public static Runnable uncheck (RunnableEx runner) {

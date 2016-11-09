@@ -12,7 +12,7 @@ public class CheckRunningThreadOnLamda {
 		
 		final String callerThreadName = Thread.currentThread().getName();
 		Arrays.sort(sortedArray, (first, second)-> {
-			// ƒ‰ƒ€ƒ_Ž®“à‚ÅŽÀs‚³‚ê‚éƒXƒŒƒbƒh‚ªŒÄ‚Ño‚µ‚½ƒXƒŒƒbƒh‚Æ“¯ˆê‚©’²¸
+			//ã€€ãƒ©ãƒ ãƒ€å¼å†…ã§å®Ÿè¡Œã•ã‚Œã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰ãŒå‘¼ã³å‡ºã—ãŸã‚¹ãƒ¬ãƒƒãƒ‰ã¨åŒä¸€ã‹èª¿æŸ»
 			final String calleeThreadName = Thread.currentThread().getName();
 			if (callerThreadName.equals(calleeThreadName)) {
 				System.out.println("same thread");

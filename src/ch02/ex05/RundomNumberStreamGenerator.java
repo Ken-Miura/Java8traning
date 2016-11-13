@@ -6,13 +6,12 @@ public final class RundomNumberStreamGenerator {
 
 	public static void main(String...s) {
 		Stream<Long> lcStream = linearCongruentialStream(25214903917L, 11L, (long)Math.pow(2.0, 48.0), 0L);
-		//Stream<Long> lcStream = linearCongruentialStream(7L, 2L, 12L, 1L);
 		lcStream.forEach(System.out::println);
 	}
 	
 	/**
 	 * 初期値X0がseedで、 Xn+1=(a*Xn + c)%m　(0からm-1までを一様乱数を生成するアルゴリズム) の値が続く無限Streamを返す。
-	 * 返れたStreamは、要素を計算して返す時にオーバーフローを検出するとjava.lang.ArithmeticExceptionをスローする。
+	 * 返されたStreamは、要素を計算するときにオーバーフローを検出するとjava.lang.ArithmeticExceptionをスローする。
 	 * @param a
 	 * @param c
 	 * @param m

@@ -23,23 +23,25 @@ public final class StreemSpeedTest {
 			System.exit(0);
 		}
 		final String contents = new String(Files.readAllBytes(Paths.get(args[0])), StandardCharsets.UTF_8);
-		final List<String> words1 = Arrays.asList(contents.split("[\\P{L}]+"));
+		final List<String> words1 = Arrays.asList(contents.split("[\\P{L}]+")); // \p{L} matches a single code point in the category "letter"
 		Stream<String> filteredStream = words1.stream().filter(w->w.length()>CRITERIA);
 		
 		final long start1 = System.nanoTime();
 		final long count1 = filteredStream.count();
-		final long end1 = System.nanoTime();
+		final long result1 = System.nanoTime() - start1;
 		System.out.println("non-parallel");
-		System.out.println("time: " + (end1 - start1) + " ns, count: " + count1);
+		System.out.println("time: " + result1 + " ns, count: " + count1);
 		
 		final List<String> words2 = Arrays.asList(contents.split("[\\P{L}]+"));
 		Stream<String> filteredParallelStream = words2.parallelStream().filter(w->w.length()>CRITERIA);
 		
 		final long start2 = System.nanoTime();
 		final long count2 = filteredParallelStream.count();
-		final long end2 = System.nanoTime();
+		final long result2 = System.nanoTime() - start2;
 		System.out.println("parallel");
-		System.out.println("time: " + (end2 - start2) + " ns, count: " + count2);
+		System.out.println("time: " + result2 + " ns, count: " + count2);
+		
+		System.out.println("difference(non-parallel - parallel): " + (result1-result2) + " ns");
 	}
 
 }

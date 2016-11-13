@@ -90,10 +90,10 @@ public class StreamUtilityTest {
 		biggerList.add(5);
 		biggerList.add(6);
 		biggerList.add(7);
+		biggerList.add(8);
 		
 		Stream<Integer> resultStream = StreamUtility.zip(smallerList.stream(), biggerList.stream());
 		List<Integer> resultList = resultStream.collect(Collectors.toList());
-		
 		assertThat(resultList.get(0), is(1));
 		assertThat(resultList.get(1), is(4));
 		assertThat(resultList.get(2), is(2));

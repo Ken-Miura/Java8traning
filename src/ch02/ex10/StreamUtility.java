@@ -5,10 +5,6 @@ import java.util.stream.Stream;
 
 public final class StreamUtility {
 
-	public static void main(String[] args) {
-		System.out.println(calculateAverage(Stream.of(0.0, 1.0, 2.0)));
-	}
-
 	// 単純にreduceで合計して、countで割れないのはreduceもcountも終端操作で一度しかストリームに適用できないから
 	public static double calculateAverage(Stream<Double> stream) {
 		Objects.requireNonNull(stream, "stream must not be null");

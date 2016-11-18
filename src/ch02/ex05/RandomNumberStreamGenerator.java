@@ -2,11 +2,14 @@ package ch02.ex05;
 
 import java.util.stream.Stream;
 
-public final class RundomNumberStreamGenerator {
+public final class RandomNumberStreamGenerator {
 
 	public static void main(String...s) {
-		Stream<Long> lcStream = linearCongruentialStream(25214903917L, 11L, (long)Math.pow(2.0, 48.0), 0L);
-		lcStream.forEach(System.out::println);
+		//Stream<Long> lcStream = linearCongruentialStream(25214903917L, 11L, 1L << 48, 0L);
+		//lcStream.forEach(System.out::println);
+		
+		Stream<Long> lcStream = linearCongruentialStream(1103515245L, 12345L, 1L << 32, 1L << 20);
+		lcStream.limit(100).forEach(System.out::println);
 	}
 	
 	/**

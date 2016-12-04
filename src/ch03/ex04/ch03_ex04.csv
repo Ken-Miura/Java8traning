@@ -1,5 +1,4 @@
 以下のJava8においては以下の9つ
-インタフェース, Predicate<T>より付加価値があるか
 java.nio.file.DirectoryStream.Filter<T>, 有る。IOExceptionスローできる。
 javax.xml.stream.EventFilter, 無い。
 java.io.FileFilter, 無い。

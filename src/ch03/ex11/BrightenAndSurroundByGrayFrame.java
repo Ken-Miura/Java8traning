@@ -39,7 +39,7 @@ public final class BrightenAndSurroundByGrayFrame extends Application {
 		int height = (int) image.getHeight();
 		double factor = Double.valueOf(args.get(1));
 		Image transformedImage = transform(image, 
-				compose(toColorTransformer(brighten(factor)), sorroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY)));
+				compose(toColorTransformer(brighten(factor)), surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY)));
 		imageView.setImage(transformedImage);
 
 		Group root = new Group();

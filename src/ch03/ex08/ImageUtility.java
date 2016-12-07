@@ -28,7 +28,7 @@ public final class ImageUtility {
 		return out;
 	}
 	
-	public static ColorTransformer sorroundByColorFrame(int width, int height, int frameSize, Color color){
+	public static ColorTransformer surroundByColorFrame(int width, int height, int frameSize, Color color){
 		if (width<0 || height<0 || frameSize<0) {
 			throw new IllegalArgumentException("width, height and frameSize must be 0 or more");
 		}

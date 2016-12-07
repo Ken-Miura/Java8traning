@@ -1,0 +1,6 @@
+UnaryOperator<Color> op = Color::brighter;
+Image finalImage = transform(image, op.compose(Color::grayscale));
+上記の呼び出しができない理由： composeメソッドの戻り値はFunction型だが、transformメソッドの第二引数はUnaryOperator型を引数として受け取るように定義されているため上記の呼び出しができない。
+
+関数合成に関しては、ノミナル型よりストラクチュアル型のほうが利便性がよいと言える。
+ストラクチュアル型であれば、Function型とUnaryOperator型の区別をせず同じ型として扱うので、transform(image, op.compose(Color::grayscale))の呼び出しが可能であるため。

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
+import ch03.ex12.ImageUtility.ColorTransformer;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
@@ -15,12 +16,11 @@ import javafx.scene.paint.Color;
 public final class LatentImage {
 
 	private final Image in;
-	private final List<ColorTransformer> pendingOperations;
+	private final List<ColorTransformer> pendingOperations = new ArrayList<>();
 	
 	private LatentImage (Image in) {
 		Objects.requireNonNull(in, "in must not be null");
 		this.in = in;
-		pendingOperations = new ArrayList<>();
 	}
 	
 	public static LatentImage from (Image image) {
@@ -55,11 +55,5 @@ public final class LatentImage {
 			}
 		}
 		return out;
-	}
-
-	
-	@FunctionalInterface
-	public static interface ColorTransformer {
-		public Color apply (int x, int y, Color colorAtXY);
 	}
 }

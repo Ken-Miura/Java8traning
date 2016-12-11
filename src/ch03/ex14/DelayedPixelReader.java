@@ -45,12 +45,15 @@ class DelayedPixelReader implements PixelReader {
 
 	@Override
 	public Color getColor(int x, int y) {
-		if (cache[x][y] == null) {
-			for (ColorTransformer f: pendingOperations) {
-				cache[x][y] = f.apply(x, y, originalReader);
-			}
+		if (cache[x][y] != null) {
+			return cache[x][y];
 		}
-		return cache[x][y];
+		Color c = originalReader.getColor(x, y);
+		for (ColorTransformer f: pendingOperations) {
+			c = f.apply(x, y, originalReader);
+		}
+		cache[x][y] = c;
+		return c;
 	}
 
 	@Override

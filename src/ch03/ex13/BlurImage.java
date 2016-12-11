@@ -5,7 +5,6 @@ package ch03.ex13;
 
 import java.util.List;
 
-import ch03.ex13.ImageUtility.ConvolutionFilter;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

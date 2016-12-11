@@ -1,3 +1,6 @@
+/**
+ * Copyright 2016 Ken Mirua
+ */
 package ch03.ex05;
 
 import java.util.Objects;
@@ -6,13 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-public final class ImageUtility {
+@FunctionalInterface
+public interface ColorTransformer {
+	public Color apply (int x, int y, Color colorAtXY);
 
-	private ImageUtility () {
-		throw new AssertionError("cannot instanciate");
-	}
-	
-	public static Image transform (Image in, ColorTransformer colorTransformer) {
+	static Image transform (Image in, ColorTransformer colorTransformer) {
 		Objects.requireNonNull(in, "in must not be null");
 		Objects.requireNonNull(colorTransformer, "colorTransformer must not be null");
 		int width = (int) in.getWidth();
@@ -25,10 +26,5 @@ public final class ImageUtility {
 			}
 		}
 		return out;
-	}
-	
-	@FunctionalInterface
-	public static interface ColorTransformer {
-		public Color apply (int x, int y, Color colorAtXY);
 	}
 }

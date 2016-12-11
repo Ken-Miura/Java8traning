@@ -37,8 +37,8 @@ public final class BrightenAndSurroundByGrayFrame extends Application {
 		double factor = Double.valueOf(args.get(1));
 		
 		Image transformedImage = LatentImage.from(image)
-									.transform(ImageUtility.brighten(factor))
-									.transform(ImageUtility.surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY))
+									.transform(ColorTransformer.brighten(factor))
+									.transform(ColorTransformer.surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY))
 									.toImage();
 		
 		imageView.setImage(transformedImage);

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-import ch03.ex12.ImageUtility.ColorTransformer;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;

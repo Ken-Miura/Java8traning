@@ -27,7 +27,7 @@ public final class BrightenImage extends Application {
 		}
 		ImageView imageView = new ImageView();
 		Image image = new Image(args.get(0));
-		Image transformedImage = ImageUtility.transform(image, 
+		Image transformedImage = ColorTransformer.transform(image, 
 				(c, factor)->{ return c.deriveColor(0, 1, factor, 1); }, Double.valueOf(args.get(1)));
 		imageView.setImage(transformedImage);
 

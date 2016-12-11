@@ -10,10 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
-public final class ImageUtility {
-	private ImageUtility () {
-		throw new AssertionError("cannot instanciate");
-	}
+public interface ColorTransformer {
 	
 	public static <T> Image transform (Image in, BiFunction<Color, T, Color> biBunction, T arg) {
 		Objects.requireNonNull(in, "in must not be null");

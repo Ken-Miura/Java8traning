@@ -15,8 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import static ch03.ex11.ImageUtility.*;
-
 public final class BrightenAndSurroundByGrayFrame extends Application {
 
 	private static final int FRAME_SIZE = 10; 
@@ -38,8 +36,8 @@ public final class BrightenAndSurroundByGrayFrame extends Application {
 		int width = (int) image.getWidth();
 		int height = (int) image.getHeight();
 		double factor = Double.valueOf(args.get(1));
-		Image transformedImage = transform(image, 
-				compose(toColorTransformer(brighten(factor)), surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY)));
+		Image transformedImage = ColorTransformer.transform(image, 
+				ColorTransformer.compose(ColorTransformer.toColorTransformer(ColorTransformer.brighten(factor)), ColorTransformer.surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY)));
 		imageView.setImage(transformedImage);
 
 		Group root = new Group();

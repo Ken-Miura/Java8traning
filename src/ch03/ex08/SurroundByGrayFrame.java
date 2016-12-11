@@ -35,7 +35,7 @@ public final class SurroundByGrayFrame extends Application {
 		Image image = new Image(args.get(0));
 		int width = (int) image.getWidth();
 		int height = (int) image.getHeight();
-		Image transformedImage = ImageUtility.transform(image, ImageUtility.surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY));
+		Image transformedImage = ColorTransformer.transform(image, ColorTransformer.surroundByColorFrame(width, height, FRAME_SIZE, Color.GRAY));
 		imageView.setImage(transformedImage);
 
 		Group root = new Group();

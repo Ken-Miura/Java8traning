@@ -9,12 +9,17 @@ import java.util.function.Supplier;
 
 public final class ParallelUtility {
 
+	private ParallelUtility () {
+		throw new AssertionError("cannot instanciate");
+	}
+	
 	/*
 	 * 有効なユースケース：？
-	 * 第三のパラメータが必要かどうか：有効な有効なユースケースが思いつかないため、必要かどうか判断できない。
+	 * 第三のパラメータが必要かどうか：有効なユースケースが思いつかないため、必要かどうか判断できない。
 	 */
 	public static <T> void doInOrderAcync (Supplier<T> first, BiConsumer<T, Throwable> second) {
 		Objects.requireNonNull(first, "first must not be null");
+		Objects.requireNonNull(second, "second must not be null");
 		Thread t = new Thread () {
 			@Override
 			public void run() {

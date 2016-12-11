@@ -21,6 +21,12 @@ public class GreetingTest {
 	}
 	
 	@Test
+	public void getText_returnsEmptyTextIfDefault() {
+		Greeting g = new Greeting();
+		assertThat(g.getText(), is(""));
+	}
+	
+	@Test
 	public void textProperty_DoesNotChangeText() {
 		Greeting g = new Greeting();
 		g.setText("test");

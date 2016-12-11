@@ -2,4 +2,6 @@ CompletableFutureにflatMapにあたるメソッドはあるか？ある場合�
 
 解答
 ある。
-CompletableFuture#thenCompose(Function<? super T, ? extends CompletionStage<U>> fn)
+thenCompose(Function<? super T, ? extends CompletionStage<U>> fn)
+thenComposeAsync(Function<? super T, ? extends CompletionStage<U>> fn)
+thenComposeAsync(Function<? super T, ? extends CompletionStage<U>> fn, Executor executor)

@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /*
- * 新しくクラスを設計する際、多くのJavaFXプロパティを持つが、ほとんどデフォルト値から変化しないと考えられるクラスの例→
+ * 多くのJavaFXプロパティを持つが、ほとんどデフォルト値から変化しないと考えられるクラスの例→グラフを表示するクラス
  * デフォルトではない値に設定されたときと要求されたときにプロパティを生成するクラスとしてGreetnigクラスを示す。
  */
 // Applicationスレッドからのみのアクセスなので排他処理必要なし

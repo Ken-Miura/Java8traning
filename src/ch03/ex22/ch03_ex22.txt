@@ -1,0 +1,5 @@
+CompletableFutureにflatMapにあたるメソッドはあるか？ある場合は何か？
+
+解答
+ある。
+CompletableFuture#thenCompose(Function<? super T, ? extends CompletionStage<U>> fn)

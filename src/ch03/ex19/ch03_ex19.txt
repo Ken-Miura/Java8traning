@@ -1,6 +1,5 @@
 Stream#(U identity,　BiFunction<U,　? super T　,U> accumulator,　BinaryOperator<U> combiner)の
-BiFunction<U,　? super T　,U>の最初の型引数Uを(? super U)とすべきか？
+BiFunction<U, ? super T , U>の最初の型引数Uを(? super U)とすべきか？
 
 解答
-すべきでない。
-BiFunction#applyの戻り値型にUが指定されているので。
+BiFunction#applyの戻り値型にUが指定されているので、そうすべきでない。

@@ -34,7 +34,7 @@ public final class BindingsUtility {
 		return objectProperty;
 	}
 	
-	public static <T, U, R> ObservableValue<R> observe(BiFunction<? super T, ? super U, R> f, ObservableValue<T> t, ObservableValue<U> u) {
+	public static <T, U, R> ObservableValue<? extends R> observe(BiFunction<? super T, ? super U,? extends R> f, ObservableValue<T> t, ObservableValue<U> u) {
 		Objects.requireNonNull(f, "f must not be null");
 		Objects.requireNonNull(t, "t must not be null");
 		Objects.requireNonNull(u, "u must not be null");

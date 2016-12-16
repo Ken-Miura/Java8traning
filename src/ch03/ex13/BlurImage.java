@@ -32,18 +32,24 @@ public final class BlurImage extends Application {
 		ImageView imageView = new ImageView();
 		Image image = new Image(args.get(0));
 
-		ConvolutionFilter blur = (x, y, matrix) -> {
+		ImageFilter blur = (x, y, w, h, reader) -> {
+			if (!(0<x && x<(w-1))) {
+				return Color.BLACK;
+			}
+			if (!(0<y && y<(h-1))) {
+				return Color.BLACK;
+			}
 			double redSum = 0.0;
 			double greenSum = 0.0;
 			double blueSum = 0.0;
-			for (Color[] row :matrix) {
-				for (Color color: row) {
-					redSum+=color.getRed();
-					greenSum+=color.getGreen();
-					blueSum+=color.getBlue();
+			for (int i=-1; i<=1; i++) {
+				for (int j=-1; j<=1; j++) {
+					redSum+=reader.getColor(x+i, y+j).getRed();
+					greenSum+=reader.getColor(x+i, y+j).getGreen();
+					blueSum+=reader.getColor(x+i, y+j).getBlue();
 				}	
 			}
-			int size = matrix.length * matrix[0].length;
+			final int size = 9;
 			return Color.color(redSum/size, greenSum/size, blueSum/size);
 		};
 		

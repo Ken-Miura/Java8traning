@@ -32,10 +32,16 @@ public final class DetectEdge extends Application {
 		ImageView imageView = new ImageView();
 		Image image = new Image(args.get(0));
 
-		ConvolutionFilter detectEdge = (x, y, matrix) -> {
-			double red = 4 * matrix[1][1].getRed() - matrix[1][0].getRed() - matrix[0][1].getRed() - matrix[2][1].getRed() - matrix[1][2].getRed();
-			double green = 4 * matrix[1][1].getGreen() - matrix[1][0].getGreen() - matrix[0][1].getGreen() - matrix[2][1].getGreen() - matrix[1][2].getGreen();
-			double blue = 4 * matrix[1][1].getBlue() - matrix[1][0].getBlue() - matrix[0][1].getBlue() - matrix[2][1].getBlue() - matrix[1][2].getBlue();
+		ImageFilter detectEdge = (x, y, w, h, reader) -> {
+			if (!(0<x && x<(w-1))) {
+				return Color.BLACK;
+			}
+			if (!(0<y && y<(h-1))) {
+				return Color.BLACK;
+			}
+			double red = 4 * reader.getColor(x, y).getRed() - reader.getColor(x, y+1).getRed() - reader.getColor(x-1, y).getRed() - reader.getColor(x+1, y).getRed() - reader.getColor(x, y-1).getRed();
+			double green = 4 * reader.getColor(x, y).getGreen() - reader.getColor(x, y+1).getGreen() - reader.getColor(x-1, y).getGreen() - reader.getColor(x+1, y).getGreen() - reader.getColor(x, y-1).getGreen();
+			double blue = 4 * reader.getColor(x, y).getBlue() - reader.getColor(x, y+1).getBlue() - reader.getColor(x-1, y).getBlue() - reader.getColor(x+1, y).getBlue() - reader.getColor(x, y-1).getBlue();
 			return Color.color(red<0.0?0.0:red>1.0?1.0:red, green<0.0?0.0:green>1.0?1.0:green, blue<0.0?0.0:blue>1.0?1.0:blue);
 		};
 		

@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 public final class LatentImage {
 
 	private Image in;
-	private final List<ConvolutionFilter> pendingOperations = new ArrayList<>();
+	private final List<ImageFilter> pendingOperations = new ArrayList<>();
 	
 	private LatentImage (Image in) {
 		Objects.requireNonNull(in, "in must not be null");
@@ -28,7 +28,7 @@ public final class LatentImage {
 	
 	public LatentImage transform (ColorTransformer f) {
 		Objects.requireNonNull(f, "f must not be null");
-		pendingOperations.add((x, y, matrix)->{ return f.apply(x, y, matrix[1][1]); });
+		pendingOperations.add((x, y, w, h, reader)->{ return f.apply(x, y, reader.getColor(x, y)); });
 		return this;
 	}
 	
@@ -36,7 +36,7 @@ public final class LatentImage {
 		return transform(toColorTransformer(f));
 	}
 	
-	public LatentImage transform (ConvolutionFilter f) {
+	public LatentImage transform (ImageFilter f) {
 		Objects.requireNonNull(f, "f must not be null");
 		// 前段までのものを強制
 		if (pendingOperations.size() != 0) {
@@ -54,30 +54,16 @@ public final class LatentImage {
 	public Image toImage () {
 		int width = (int) in.getWidth();
 		int height = (int) in.getHeight();
-		WritableImage temp = new WritableImage(1+width+1, 1+height+1); // 畳みこみ操作のために左右上下に１ピクセル多く確保
+		WritableImage out = new WritableImage(width, height);
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
-				temp.getPixelWriter().setColor(x+1, y+1, in.getPixelReader().getColor(x, y));
+				Color c = in.getPixelReader().getColor(x, y);
+				for (final ImageFilter f: pendingOperations) {
+					c = f.apply(x, y, width, height, in.getPixelReader());
+				}
+				out.getPixelWriter().setColor(x, y, c);
 			}
 		}
-		
-		for (int x=0; x<width; x++) {
-			for (int y=0; y<height; y++) {
-				//Color c = temp.getPixelReader().getColor(x+1, y+1);
-				Color[][] matrix = new Color[3][3];
-				for (int i=0; i<matrix.length; i++) {
-					for (int j=0; j<matrix[0].length; j++) {
-						matrix[i][j] = temp.getPixelReader().getColor(x+i, y+j);
-					}
-				}
-				for (final ConvolutionFilter f: pendingOperations) {
-					//c = f.apply(x, y, matrix);
-					matrix[1][1] = f.apply(x, y, matrix);
-				}
-				//temp.getPixelWriter().setColor(x+1, y+1, c);
-				temp.getPixelWriter().setColor(x+1, y+1, matrix[1][1]);
-			}
-		}
-		return new WritableImage(temp.getPixelReader(), 1, 1, width, height);
+		return out;
 	}
 }

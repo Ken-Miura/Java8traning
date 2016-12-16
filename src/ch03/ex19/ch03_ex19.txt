@@ -2,4 +2,4 @@ Stream#(U identity,　BiFunction<U,　? super T　,U> accumulator,　BinaryOpera
 BiFunction<U, ? super T , U>の最初の型引数Uを(? super U)とすべきか？
 
 解答
-BiFunction#applyの戻り値型にUが指定されているので、そうすべきでない。
+BiFunction#applyの戻り値型にUが指定されていて、特に意味がないのでそうすべきでない。

@@ -12,6 +12,7 @@ public final class StreamUtility {
 		test.forEach(System.out::println);
 	}
 
+	// TODO splitatorを利用した実装
 	public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
 		Objects.requireNonNull(first, "first must not be null");
 		Objects.requireNonNull(second, "second must not be null");

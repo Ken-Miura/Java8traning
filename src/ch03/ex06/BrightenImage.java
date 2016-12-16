@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * Usage: 画像ファイルのURLとどれくらい明るくしたいかを入力。例 file:C:\Users\Ken\Desktop\test.png 1.2
+ */
 public final class BrightenImage extends Application {
 
 	@Override

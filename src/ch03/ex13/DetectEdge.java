@@ -34,7 +34,7 @@ public final class DetectEdge extends Application {
 
 		ConvolutionFilter detectEdge = (x, y, matrix) -> {
 			double red = 4 * matrix[1][1].getRed() - matrix[1][0].getRed() - matrix[0][1].getRed() - matrix[2][1].getRed() - matrix[1][2].getRed();
-			double green = 4 * matrix[1][1].getBlue() - matrix[1][0].getGreen() - matrix[0][1].getGreen() - matrix[2][1].getGreen() - matrix[1][2].getGreen();
+			double green = 4 * matrix[1][1].getGreen() - matrix[1][0].getGreen() - matrix[0][1].getGreen() - matrix[2][1].getGreen() - matrix[1][2].getGreen();
 			double blue = 4 * matrix[1][1].getBlue() - matrix[1][0].getBlue() - matrix[0][1].getBlue() - matrix[2][1].getBlue() - matrix[1][2].getBlue();
 			return Color.color(red<0.0?0.0:red>1.0?1.0:red, green<0.0?0.0:green>1.0?1.0:green, blue<0.0?0.0:blue>1.0?1.0:blue);
 		};

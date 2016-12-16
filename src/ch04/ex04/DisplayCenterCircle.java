@@ -26,7 +26,7 @@ public final class DisplayCenterCircle extends Application {
 		circle.centerXProperty().bind(Bindings.divide(scene.widthProperty(), 2));
 		circle.centerYProperty().bind(Bindings.divide(scene.heightProperty(), 2));
 		
-		circle.radiusProperty().bind(Bindings.divide(scene.heightProperty(), 2));
+		circle.radiusProperty().bind(Bindings.divide(Bindings.min(scene.widthProperty(), scene.heightProperty()), 2));
 		
 	    primaryStage.setTitle(DisplayCenterCircle.class.getSimpleName());
 	    primaryStage.setScene(scene);

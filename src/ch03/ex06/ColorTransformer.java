@@ -12,16 +12,16 @@ import javafx.scene.paint.Color;
 
 public interface ColorTransformer {
 	
-	public static <T> Image transform (Image in, BiFunction<Color, T, Color> biBunction, T arg) {
+	public static <T> Image transform (Image in, BiFunction<Color, T, Color> biFunction, T arg) {
 		Objects.requireNonNull(in, "in must not be null");
-		Objects.requireNonNull(biBunction, "biBunction must not be null");
+		Objects.requireNonNull(biFunction, "biFunction must not be null");
 		int width = (int) in.getWidth();
 		int height = (int) in.getHeight();
 		WritableImage out = new WritableImage(width, height);
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
 				out.getPixelWriter().setColor(x, y, 
-						biBunction.apply(in.getPixelReader().getColor(x, y), arg));
+						biFunction.apply(in.getPixelReader().getColor(x, y), arg));
 			}
 		}
 		return out;

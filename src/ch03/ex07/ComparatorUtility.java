@@ -4,6 +4,7 @@
 package ch03.ex07;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public final class ComparatorUtility {
 
@@ -13,6 +14,21 @@ public final class ComparatorUtility {
 	
 	private ComparatorUtility () {
 		throw new AssertionError("cannot instanciate");
+	}
+
+	public static Comparator<String> reverse(Comparator<String> comparator) {
+		Objects.requireNonNull(comparator, "comparator must not be null");
+		return (c1, c2)-> { return comparator.compare(c2, c1); };
+	}
+	
+	public static Comparator<String> ignoreCase(Comparator<String> comparator) {
+		Objects.requireNonNull(comparator, "comparator must not be null");
+		return (c1, c2)-> { return comparator.compare(c2.toLowerCase().toUpperCase(), c1.toLowerCase().toUpperCase()); };
+	}
+	
+	public static Comparator<String> excludeSpace(Comparator<String> comparator) {
+		Objects.requireNonNull(comparator, "comparator must not be null");
+		return (c1, c2)-> { return comparator.compare(c2.replaceAll("\\s", ""), c1.replaceAll("\\s", "")); };
 	}
 	
 	public static Comparator<String> comparatorGenerator(Order order, boolean caseSensitive, boolean includeSpace) {

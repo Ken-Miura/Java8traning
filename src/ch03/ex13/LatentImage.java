@@ -63,7 +63,7 @@ public final class LatentImage {
 		
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
-				Color c = temp.getPixelReader().getColor(x+1, y+1);
+				//Color c = temp.getPixelReader().getColor(x+1, y+1);
 				Color[][] matrix = new Color[3][3];
 				for (int i=0; i<matrix.length; i++) {
 					for (int j=0; j<matrix[0].length; j++) {
@@ -71,9 +71,11 @@ public final class LatentImage {
 					}
 				}
 				for (final ConvolutionFilter f: pendingOperations) {
-						c = f.apply(x, y, matrix);
+					//c = f.apply(x, y, matrix);
+					matrix[1][1] = f.apply(x, y, matrix);
 				}
-				temp.getPixelWriter().setColor(x+1, y+1, c);
+				//temp.getPixelWriter().setColor(x+1, y+1, c);
+				temp.getPixelWriter().setColor(x+1, y+1, matrix[1][1]);
 			}
 		}
 		return new WritableImage(temp.getPixelReader(), 1, 1, width, height);

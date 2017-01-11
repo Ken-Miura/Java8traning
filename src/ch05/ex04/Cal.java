@@ -3,6 +3,7 @@
  */
 package ch05.ex04;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public final class Cal {
@@ -33,7 +34,7 @@ public final class Cal {
 		for (int i=0; i<lengthOfMonth; i++) {
 			LocalDate d = firstDay.plusDays(i);
 			String formatted = String.format("%2d ", d.getDayOfMonth());
-			if (d.getDayOfWeek().getValue()==7) { // 日曜日で折り返し
+			if (d.getDayOfWeek() == DayOfWeek.SUNDAY) {
 				formatted = formatted.substring(0, formatted.length()-1).concat("\n");
 			}
 			System.out.print(formatted);

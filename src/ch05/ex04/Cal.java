@@ -29,12 +29,11 @@ public final class Cal {
 		for (int i=0; i<space; i++) {
 			System.out.print("   ");
 		}
-		LocalDate displayedDay = null;
 		int lengthOfMonth = firstDay.lengthOfMonth();
 		for (int i=0; i<lengthOfMonth; i++) {
-			displayedDay = firstDay.plusDays(i);
-			String formatted = String.format("%2d ", displayedDay.getDayOfMonth());
-			if (displayedDay.getDayOfWeek().getValue()==7) { // 日曜日で折り返し
+			LocalDate d = firstDay.plusDays(i);
+			String formatted = String.format("%2d ", d.getDayOfMonth());
+			if (d.getDayOfWeek().getValue()==7) { // 日曜日で折り返し
 				formatted = formatted.substring(0, formatted.length()-1).concat("\n");
 			}
 			System.out.print(formatted);

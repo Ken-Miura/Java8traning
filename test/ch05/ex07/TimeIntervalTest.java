@@ -100,7 +100,7 @@ public class TimeIntervalTest {
 	}
 	
 	@Test
-	public void overlapWith_returnsTrueIfOverlapEdgeCaseInCase1() {
+	public void overlapWith_returnsFalseIfStartAndEndAreSameCase1() {
 		LocalDateTime start1 = LocalDateTime.of(2017, 1, 14, 12, 0);
 		LocalDateTime end1 = LocalDateTime.of(2017, 1, 15, 12, 0);
 		TimeInterval timeInterval1 = new TimeInterval(start1, end1);
@@ -111,7 +111,7 @@ public class TimeIntervalTest {
 		
 		boolean actual = timeInterval1.overlapWith(timeInterval2);
 		
-		assertThat(actual, is(true));
+		assertThat(actual, is(false));
 	}
 	
 	@Test
@@ -130,7 +130,7 @@ public class TimeIntervalTest {
 	}
 	
 	@Test
-	public void overlapWith_returnsTrueIfOverlapEdgeCaseInCase2() {
+	public void overlapWith_returnsFalseIfStartAndEndAreSameCase2() {
 		LocalDateTime start1 = LocalDateTime.of(2017, 1, 14, 12, 0);
 		LocalDateTime end1 = LocalDateTime.of(2017, 1, 15, 12, 0);
 		TimeInterval timeInterval1 = new TimeInterval(start1, end1);
@@ -141,7 +141,7 @@ public class TimeIntervalTest {
 		
 		boolean actual = timeInterval1.overlapWith(timeInterval2);
 		
-		assertThat(actual, is(true));
+		assertThat(actual, is(false));
 	}
 	
 	@Test

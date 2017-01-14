@@ -14,51 +14,51 @@ import java.time.ZonedDateTime;
 public class TimeCalculationUtilityTest {
 
 	@Test(expected=NullPointerException.class)
-	public void calculateTimeBetween_throwsNullPointerExceptionIfNullIsPassedAsFirstArg() {
-		TimeCalculationUtility.calculateTimeBetween(null, ZonedDateTime.now());
+	public void calculateTravelTimeBetween_throwsNullPointerExceptionIfNullIsPassedAsFirstArg() {
+		TimeCalculationUtility.calculateTravelTimeBetween(null, ZonedDateTime.now());
 	}
 	
 	@Test(expected=NullPointerException.class)
-	public void calculateTimeBetween_throwsNullPointerExceptionIfNullIsPassedAsSecondArg() {
-		TimeCalculationUtility.calculateTimeBetween(ZonedDateTime.now(), null);
+	public void calculateTravelTimeBetween_throwsNullPointerExceptionIfNullIsPassedAsSecondArg() {
+		TimeCalculationUtility.calculateTravelTimeBetween(ZonedDateTime.now(), null);
+	}
+	
+	@Test
+	public void calculateTravelTimeBetween_returnsDurationBetweenTwoTimesOfDay() {
+		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2017, 1, 14, 14, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
+		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2017, 1, 14, 16, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
+		Duration expected = Duration.ofMinutes(695);
+		
+		Duration actual = TimeCalculationUtility.calculateTravelTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
+		
+		assertThat(actual, is(expected));
+	}
+	
+	@Test
+	public void calculateTravelTimeBetween_returnsDurationBetweenTwoTimesOfDayWhenSwitchingSummerTimeCase1() {
+		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2017, 4, 1, 1, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
+		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2017, 4, 1, 3, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
+		Duration expected = Duration.ofMinutes(695);
+		
+		Duration actual = TimeCalculationUtility.calculateTravelTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
+		
+		assertThat(actual, is(expected));
+	}
+	
+	@Test
+	public void calculateTravelTimeBetween_returnsDurationBetweenTwoTimesOfDayWhenSwitchingSummerTimeCase2() {
+		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2016, 10, 30, 1, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
+		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2016, 10, 30, 3, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
+		Duration expected = Duration.ofMinutes(695);
+		
+		Duration actual = TimeCalculationUtility.calculateTravelTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
+		
+		assertThat(actual, is(expected));
 	}
 	
 	@Test(expected=NullPointerException.class)
 	public void calculateTimesOfDay_throwsNullPointerExceptionIfNullIsPassedAsFirstArg() {
 		TimeCalculationUtility.calculateTimesOfDay(null, Duration.ofHours(1), ZoneId.systemDefault());
-	}
-	
-	@Test
-	public void calculateTimeBetween_returnsDurationBetweenTwoTimesOfDay() {
-		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2017, 1, 14, 14, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
-		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2017, 1, 14, 16, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
-		Duration expected = Duration.ofMinutes(695);
-		
-		Duration actual = TimeCalculationUtility.calculateTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
-		
-		assertThat(actual, is(expected));
-	}
-	
-	@Test
-	public void calculateTimeBetween_returnsDurationBetweenTwoTimesOfDayWhenSwitchingSummerTimeCase1() {
-		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2017, 4, 1, 1, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
-		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2017, 4, 1, 3, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
-		Duration expected = Duration.ofMinutes(695);
-		
-		Duration actual = TimeCalculationUtility.calculateTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
-		
-		assertThat(actual, is(expected));
-	}
-	
-	@Test
-	public void calculateTimeBetween_returnsDurationBetweenTwoTimesOfDayWhenSwitchingSummerTimeCase2() {
-		ZonedDateTime timeAtLosAngeles = ZonedDateTime.of(2016, 10, 30, 1, 5, 0, 0, ZoneId.of("CET")); // フランクフルトでの時間
-		ZonedDateTime timeAtFrankfurt = ZonedDateTime.of(2016, 10, 30, 3, 40, 0, 0, ZoneId.of("America/Los_Angeles"));
-		Duration expected = Duration.ofMinutes(695);
-		
-		Duration actual = TimeCalculationUtility.calculateTimeBetween(timeAtLosAngeles, timeAtFrankfurt);
-		
-		assertThat(actual, is(expected));
 	}
 	
 	@Test(expected=NullPointerException.class)

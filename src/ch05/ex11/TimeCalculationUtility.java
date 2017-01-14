@@ -15,7 +15,7 @@ public final class TimeCalculationUtility {
 		throw new AssertionError("cannot instanciate");
 	}
 	
-	public static Duration calculateTimeBetween (ZonedDateTime start, ZonedDateTime end) {
+	public static Duration calculateTravelTimeBetween (ZonedDateTime start, ZonedDateTime end) {
 		Objects.requireNonNull(start, "start must not be null");
 		Objects.requireNonNull(end, "end must not be null");
 		Instant startInstant = start.toInstant();

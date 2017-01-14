@@ -21,16 +21,23 @@ public final class TimeInterval {
 		this.end = end;
 	}
 	
+	/**
+	 * タイムインターバルが重なっているかどうかを返す。
+	 * 例えば、下記の二つのインターバル（年月日は同一として省略。時分秒のみ記載）の場合はそれぞれ以下の結果となる。
+	 * 10:00:00-12:00:00と13:00:00-14:00:00 → false
+	 * 10:00:00-12:00:00と12:00:00-14:00:00 → false
+	 * 10:00:00-12:00:00と11:00:00-13:00:00 → true
+	 */
 	public boolean overlapWith (TimeInterval timeInterval) {
 		if (timeInterval == null) {
 			return false;
 		}
 		
-		if (start.isAfter(timeInterval.getStart()) && (start.isBefore(timeInterval.getEnd()) || start.isEqual(timeInterval.getEnd())) ) {
+		if (start.isAfter(timeInterval.getStart()) && start.isBefore(timeInterval.getEnd()) ) {
 			return true;
 		}
 		
-		if ((end.isEqual(timeInterval.getStart()) || end.isAfter(timeInterval.getStart())) && end.isBefore(timeInterval.getEnd())) {
+		if (end.isAfter(timeInterval.getStart()) && end.isBefore(timeInterval.getEnd())) {
 			return true;
 		}
 		

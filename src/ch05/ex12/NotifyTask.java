@@ -59,15 +59,13 @@ public final class NotifyTask extends Application {
 				BufferedReader in = new BufferedReader(inputStreamReader);) {
 			
 			String line = null;
-			int taskCount = 0;
 			Set<Task> taskSet = new HashSet<>();
 			while ((line=in.readLine()) != null) {
-				taskCount++;
 				String[] taskAndTime = line.split("[\\s]+");
 				taskSet.add(new Task(taskAndTime[0], ZonedDateTime.parse(taskAndTime[1])));
 			}
 			
-			final CountDownLatch latch = new CountDownLatch(taskCount);
+			final CountDownLatch latch = new CountDownLatch(taskSet.size());
 			
 			taskSet.stream().forEach(task->{
 				ZonedDateTime localTime = task.getTaskTime().toInstant().atZone(ZoneId.systemDefault());

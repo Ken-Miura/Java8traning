@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,7 +32,7 @@ import javafx.stage.Stage;
 public final class NotifyTask extends Application {
 
 	private static final Timer timer = new Timer(true);
-	private static final TaskCounter counter = new TaskCounter();
+	private static final AtomicInteger taskCounter = new AtomicInteger();
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -57,9 +58,7 @@ public final class NotifyTask extends Application {
 				BufferedReader in = new BufferedReader(inputStreamReader);) {
 			String line = null;
 			while ((line=in.readLine()) != null) {
-				 synchronized (counter) {
-					 counter.increment();
-				 }
+				taskCounter.incrementAndGet();
 				
 				String[] taskAndTime = line.split("[\\s]+");
 				
@@ -77,9 +76,9 @@ public final class NotifyTask extends Application {
 					        notification.getDialogPane().setHeaderText(task);
 					        notification.getDialogPane().setContentText("One hour before " + task);	
 					        notification.showAndWait();
-					        synchronized (counter) {
-					        	counter.decrement();
-					        	counter.notifyAll();
+					        synchronized (taskCounter) {
+					        	taskCounter.decrementAndGet();
+					        	taskCounter.notifyAll();
 					        }
 						});
 					}
@@ -88,10 +87,10 @@ public final class NotifyTask extends Application {
 		}
 		
 		new Thread (()->{
-			synchronized (counter) {
-				while (counter.get()>0) {
+			synchronized (taskCounter) {
+				while (taskCounter.get()>0) {
 					try {
-						counter.wait();
+						taskCounter.wait();
 					} catch (InterruptedException ignored) {
 						ignored.printStackTrace();
 					}

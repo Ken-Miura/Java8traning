@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 public final class NotifyTask extends Application {
 
 	private static final Timer timer = new Timer(true);
+	private static final TaskCounter counter = new TaskCounter();
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -56,6 +57,10 @@ public final class NotifyTask extends Application {
 				BufferedReader in = new BufferedReader(inputStreamReader);) {
 			String line = null;
 			while ((line=in.readLine()) != null) {
+				 synchronized (counter) {
+					 counter.increment();
+				 }
+				
 				String[] taskAndTime = line.split("[\\s]+");
 				
 				String task = taskAndTime[0];
@@ -71,11 +76,29 @@ public final class NotifyTask extends Application {
 					        notification.setTitle("notification");
 					        notification.getDialogPane().setHeaderText(task);
 					        notification.getDialogPane().setContentText("One hour before " + task);	
-					        notification.show();
+					        notification.showAndWait();
+					        synchronized (counter) {
+					        	counter.decrement();
+					        	counter.notifyAll();
+					        }
 						});
 					}
 				}, Date.from(notificationTime.toInstant()));
 			}
-		}		
+		}
+		
+		new Thread (()->{
+			synchronized (counter) {
+				while (counter.get()>0) {
+					try {
+						counter.wait();
+					} catch (InterruptedException ignored) {
+						ignored.printStackTrace();
+					}
+				}
+			}
+			Platform.exit();
+		}).start();
+
 	}
 }

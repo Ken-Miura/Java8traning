@@ -10,10 +10,12 @@ import java.io.InputStreamReader;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -32,7 +34,6 @@ import javafx.stage.Stage;
 public final class NotifyTask extends Application {
 
 	private static final Timer timer = new Timer(true);
-	private static final AtomicInteger taskCounter = new AtomicInteger();
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -56,15 +57,20 @@ public final class NotifyTask extends Application {
 		try (	FileInputStream fileInputStream = new FileInputStream(new File(args.get(0)));
 				InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
 				BufferedReader in = new BufferedReader(inputStreamReader);) {
+			
 			String line = null;
+			int taskCount = 0;
+			Set<Task> taskSet = new HashSet<>();
 			while ((line=in.readLine()) != null) {
-				taskCounter.incrementAndGet();
-				
+				taskCount++;
 				String[] taskAndTime = line.split("[\\s]+");
-				
-				String task = taskAndTime[0];
-				ZonedDateTime time = ZonedDateTime.parse(taskAndTime[1]);
-				ZonedDateTime localTime = time.toInstant().atZone(ZoneId.systemDefault());
+				taskSet.add(new Task(taskAndTime[0], ZonedDateTime.parse(taskAndTime[1])));
+			}
+			
+			final CountDownLatch latch = new CountDownLatch(taskCount);
+			
+			taskSet.stream().forEach(task->{
+				ZonedDateTime localTime = task.getTaskTime().toInstant().atZone(ZoneId.systemDefault());
 				ZonedDateTime notificationTime = localTime.minusHours(1);
 				timer.schedule(new TimerTask() {
 					
@@ -73,31 +79,23 @@ public final class NotifyTask extends Application {
 						Platform.runLater(()->{
 					        Alert notification = new Alert(AlertType.INFORMATION);
 					        notification.setTitle("notification");
-					        notification.getDialogPane().setHeaderText(task);
-					        notification.getDialogPane().setContentText("One hour before " + task);	
+					        notification.getDialogPane().setHeaderText(task.getTaskName());
+					        notification.getDialogPane().setContentText("One hour before " + task.getTaskName());	
 					        notification.showAndWait();
-					        synchronized (taskCounter) {
-					        	taskCounter.decrementAndGet();
-					        	taskCounter.notifyAll();
-					        }
+					        latch.countDown();
 						});
 					}
 				}, Date.from(notificationTime.toInstant()));
-			}
-		}
-		
-		new Thread (()->{
-			synchronized (taskCounter) {
-				while (taskCounter.get()>0) {
-					try {
-						taskCounter.wait();
-					} catch (InterruptedException ignored) {
-						ignored.printStackTrace();
-					}
+			});
+			
+			new Thread (()->{
+				try {
+					latch.await();
+				} catch (InterruptedException ignored) {
+					ignored.printStackTrace();
 				}
-			}
-			Platform.exit();
-		}).start();
-
+				Platform.exit();
+			}).start();
+		}
 	}
 }

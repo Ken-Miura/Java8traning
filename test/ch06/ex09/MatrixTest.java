@@ -113,7 +113,7 @@ public class MatrixTest {
 	}
 	
 	@Test
-	public void multiply_returns(){
+	public void multiply_returnsMatrixMultipliedByMatrixPassedAsArg(){
 		Matrix expected = new Matrix(2, 1);
 		expected.setValue(1, 1, 1.0 * 4.5);
 		expected.setValue(2, 1, 1.2 * 1.5);

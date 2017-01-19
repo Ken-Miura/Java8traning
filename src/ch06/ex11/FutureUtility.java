@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -16,6 +18,7 @@ public final class FutureUtility {
 
 	public static void main (String[] args) throws IOException, InterruptedException, ExecutionException {
 		repeat(FutureUtility::getPasswordAuthentication, FutureUtility::validatePassword);
+		ForkJoinPool.commonPool().awaitQuiescence(30, TimeUnit.SECONDS);
 	}
 	
 	private static final Scanner scanner = new Scanner (System.in);
@@ -51,15 +54,18 @@ public final class FutureUtility {
 		throw new AssertionError("cannot instanciate");
 	}
 	
-	public static <T> CompletableFuture<T> repeat (Supplier<T> action, Predicate<T> until) throws InterruptedException, ExecutionException {
+	public static <T> CompletableFuture<T> repeat (Supplier<T> action, Predicate<T> until) {
 		Objects.requireNonNull(action, "action must not be null");
 		Objects.requireNonNull(until, "until must not be null");
 		
-		final CompletableFuture<T> ret = CompletableFuture.supplyAsync(action);
-		if (ret.thenApplyAsync(t->{ return until.test(t); }).get()) {
-			return ret;			
-		} else {
-			return repeat(action, until);
-		}
+		return CompletableFuture
+				.supplyAsync(action)
+				.thenComposeAsync(t->{ 
+					if (until.test(t)) { 
+						return CompletableFuture.completedFuture(t);
+					} else {
+						return repeat(action, until);
+					}
+				});
 	}
 }

@@ -57,12 +57,19 @@ public class CollectionUtilityTest {
 	
 	@Test
 	public void map_returnsValueMappedFuture() throws InterruptedException, ExecutionException {
-		ExecutorService executorService = Executors.newCachedThreadPool();
-		Future<String> future = executorService.submit(()->{
-			return "Alice";
-		});
-		
-		Future<Character> mappedFuture = CollectionUtility.map(future, s->s.charAt(0));
-		assertThat(mappedFuture.get(), is('A'));
+		ExecutorService executorService = null;
+		try {
+			executorService = Executors.newCachedThreadPool();Executors.newCachedThreadPool();
+			Future<String> future = executorService.submit(()->{
+				return "Alice";
+			});
+			
+			Future<Character> mappedFuture = CollectionUtility.map(future, s->s.charAt(0));
+			assertThat(mappedFuture.get(), is('A'));	
+		} finally {
+			if (executorService != null) {
+				executorService.shutdown();
+			}
+		}
 	}
 }

@@ -28,6 +28,11 @@ public final class DisplayWordsFromFiles {
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws InterruptedException {
+		if (args.length < 1) {
+			System.out.println("Enter the file path as arg.");
+			System.out.println("ex. java DisplayWordsFromFiles C:\\Users\\Ken\\alice.txt");
+			System.exit(0);
+		}
 		List<File> fileList = new ArrayList<>(args.length);
 		for (final String path: args) {
 			fileList.add(new File(path));

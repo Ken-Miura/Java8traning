@@ -39,5 +39,6 @@ public final class Cal {
 			}
 			System.out.print(formatted);
 		}
+		System.out.println();
 	}
 }

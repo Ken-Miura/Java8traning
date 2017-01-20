@@ -16,7 +16,7 @@ public final class AtomicLongAndLongAdderTest {
 	private static final LongAdder longAdderCounter = new LongAdder();
 	
 	private static final int NUM_OF_THREADS = 1000;
-	private static final int NUM_OF_TRIAL_PER_THREAD = 100000;
+	private static final int NUM_OF_TRIALS_PER_THREAD = 100000;
 	
 	private static ExecutorService service = null;
 	
@@ -41,7 +41,7 @@ public final class AtomicLongAndLongAdderTest {
 				} catch (InterruptedException igonored) {
 					igonored.printStackTrace();
 				}
-				for (int j=0; j<NUM_OF_TRIAL_PER_THREAD; j++) {
+				for (int j=0; j<NUM_OF_TRIALS_PER_THREAD; j++) {
 					atomicLongCounter.incrementAndGet();
 				}
 				eachThreadLatch.countDown();
@@ -67,7 +67,7 @@ public final class AtomicLongAndLongAdderTest {
 				} catch (InterruptedException igonored) {
 					igonored.printStackTrace();
 				}
-				for (int j=0; j<NUM_OF_TRIAL_PER_THREAD; j++) {
+				for (int j=0; j<NUM_OF_TRIALS_PER_THREAD; j++) {
 					longAdderCounter.increment();
 				}
 				eachThreadLatch.countDown();
@@ -76,6 +76,7 @@ public final class AtomicLongAndLongAdderTest {
 		startLatch.countDown();
 		long start = System.nanoTime();
 		eachThreadLatch.await();
+		longAdderCounter.sum();
 		long time = System.nanoTime() - start;
 
 		System.out.println("LongAdder");

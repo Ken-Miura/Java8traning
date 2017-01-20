@@ -3,10 +3,9 @@
  */
 package ch05.ex12;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -53,47 +52,42 @@ public final class NotifyTask extends Application {
 		}
 		
 		Platform.setImplicitExit(false);
-		
-		try (	FileInputStream fileInputStream = new FileInputStream(new File(args.get(0)));
-				InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
-				BufferedReader in = new BufferedReader(inputStreamReader);) {
 			
-			String line = null;
-			Set<Task> taskSet = new HashSet<>();
-			while ((line=in.readLine()) != null) {
-				String[] taskAndTime = line.split("[\\s]+");
-				taskSet.add(new Task(taskAndTime[0], ZonedDateTime.parse(taskAndTime[1])));
-			}
-			
-			final CountDownLatch latch = new CountDownLatch(taskSet.size());
-			
-			taskSet.stream().forEach(task->{
-				ZonedDateTime localTime = task.getTaskTime().toInstant().atZone(ZoneId.systemDefault());
-				ZonedDateTime notificationTime = localTime.minusHours(1);
-				timer.schedule(new TimerTask() {
-					
-					@Override
-					public void run() {
-						Platform.runLater(()->{
-					        Alert notification = new Alert(AlertType.INFORMATION);
-					        notification.setTitle("notification");
-					        notification.getDialogPane().setHeaderText(task.getTaskName());
-					        notification.getDialogPane().setContentText("One hour before " + task.getTaskName());	
-					        notification.showAndWait();
-					        latch.countDown();
-						});
-					}
-				}, Date.from(notificationTime.toInstant()));
-			});
-			
-			new Thread (()->{
-				try {
-					latch.await();
-				} catch (InterruptedException ignored) {
-					ignored.printStackTrace();
-				}
-				Platform.exit();
-			}).start();
+		List<String> lines = Files.readAllLines(new File(args.get(0)).toPath(), StandardCharsets.UTF_8);
+		Set<Task> taskSet = new HashSet<>();
+		for (final String line: lines) {
+			String[] taskAndTime = line.split("[\\s]+");
+			taskSet.add(new Task(taskAndTime[0], ZonedDateTime.parse(taskAndTime[1])));
 		}
+		
+		final CountDownLatch latch = new CountDownLatch(taskSet.size());
+		
+		taskSet.stream().forEach(task->{
+			ZonedDateTime localTime = task.getTime().toInstant().atZone(ZoneId.systemDefault());
+			ZonedDateTime notificationTime = localTime.minusHours(1);
+			timer.schedule(new TimerTask() {
+					
+				@Override
+				public void run() {
+					Platform.runLater(()->{
+				        Alert notification = new Alert(AlertType.INFORMATION);
+				        notification.setTitle("notification");
+				        notification.getDialogPane().setHeaderText(task.getName());
+				        notification.getDialogPane().setContentText("One hour before " + task.getName());	
+				        notification.showAndWait();
+				        latch.countDown();
+					});
+				}
+			}, Date.from(notificationTime.toInstant()));
+		});
+		
+		new Thread (()->{
+			try {
+				latch.await();
+			} catch (InterruptedException ignored) {
+				ignored.printStackTrace();
+			}
+			Platform.exit();
+		}).start();
 	}
 }

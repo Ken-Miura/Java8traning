@@ -24,17 +24,13 @@ public final class ArraysParallelSortTest {
 			}
 			
 			int[] intArrayForParallelSort = new int[arraySize];
-			for (int i=0; i<intArrayForParallelSort.length; i++) {
-				intArrayForParallelSort[i] = intArray[i];
-			}
+			intArrayForParallelSort = intArray.clone();
 			long parallelSortStart = System.nanoTime();
 			Arrays.parallelSort(intArrayForParallelSort);
 			long parallelSortTime = System.nanoTime() - parallelSortStart;
 			
 			int[] intArrayForSort = new int[arraySize];
-			for (int i=0; i<intArrayForSort.length; i++) {
-				intArrayForSort[i] = intArray[i];
-			}
+			intArrayForSort = intArray.clone();
 			long sortStart = System.nanoTime();
 			Arrays.sort(intArrayForSort);
 			long sortTime = System.nanoTime() - sortStart;

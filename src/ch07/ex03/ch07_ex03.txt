@@ -1,0 +1,10 @@
+jjsに打ち込んだコマンドと出力は以下の通り（jre1.8.0_102に付属するjjsではテキストの問題のような奇妙な表示は起こらなかった。）
+
+打ち込んだコマンド
+var b = new java.math.BigInteger('1234567890987654321')
+b
+b.mod(java.math.BigInteger.TEN)
+
+結果得られた出力
+1234567890987654321 // bに対する出力
+1 // b.mod(java.math.BigInteger.TEN)に対する出力

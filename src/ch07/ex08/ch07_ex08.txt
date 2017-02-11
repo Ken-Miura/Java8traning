@@ -1,0 +1,50 @@
+以下jjs -scriptingに打ち込んだコマンド
+for (entry in $ENV) {print(entry + "->" + $ENV[entry]);}
+// 以下出力
+USERDOMAIN_ROAMINGPROFILE->DESKTOP-ST4E7P0
+LOCALAPPDATA->C:\Users\Ken\AppData\Local
+PROCESSOR_LEVEL->6
+VS140COMNTOOLS->C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+USERDOMAIN->DESKTOP-ST4E7P0
+FPS_BROWSER_APP_PROFILE_STRING->Internet Explorer
+LOGONSERVER->\\DESKTOP-ST4E7P0
+PROMPT->$P$G
+SESSIONNAME->Console
+ALLUSERSPROFILE->C:\ProgramData
+PROCESSOR_ARCHITECTURE->AMD64
+VS120COMNTOOLS->C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\
+PSModulePath->C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+SystemDrive->C:
+OneDrive->C:\Users\Ken\OneDrive
+=C:->C:\Users\Ken
+APPDATA->C:\Users\Ken\AppData\Roaming
+USERNAME->Ken
+ProgramFiles(x86)->C:\Program Files (x86)
+VBOX_MSI_INSTALL_PATH->C:\Program Files\Oracle\VirtualBox\
+CommonProgramFiles->C:\Program Files\Common Files
+Path->C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Program Files\NSSM;C:\Program Files\TortoiseGit\bin;C:\Users\Ken\AppData\Local\Microsoft\WindowsApps;
+FPS_BROWSER_USER_PROFILE_STRING->Default
+PATHEXT->.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+OS->Windows_NT
+COMPUTERNAME->DESKTOP-ST4E7P0
+PROCESSOR_REVISION->5e03
+CommonProgramW6432->C:\Program Files\Common Files
+ComSpec->C:\Windows\system32\cmd.exe
+ProgramData->C:\ProgramData
+ProgramW6432->C:\Program Files
+HOMEPATH->\Users\Ken
+SystemRoot->C:\Windows
+TEMP->C:\Users\Ken\AppData\Local\Temp
+HOMEDRIVE->C:
+PROCESSOR_IDENTIFIER->Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+USERPROFILE->C:\Users\Ken
+TMP->C:\Users\Ken\AppData\Local\Temp
+VS110COMNTOOLS->C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Tools\
+VSSDK140Install->C:\Program Files (x86)\Microsoft Visual Studio 14.0\VSSDK\
+CommonProgramFiles(x86)->C:\Program Files (x86)\Common Files
+ProgramFiles->C:\Program Files
+PUBLIC->C:\Users\Public
+NUMBER_OF_PROCESSORS->8
+windir->C:\Windows
+=::->::\
+PWD->C:\Users\Ken

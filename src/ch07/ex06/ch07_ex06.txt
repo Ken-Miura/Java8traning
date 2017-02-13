@@ -1,9 +1,0 @@
-以下jjs -scriptingに打ち込んだコマンド。linux Ubuntu上で実施。
-function pipe () { for (var i = 0; i < arguments.length; i++) {	$EXEC(arguments[i], $OUT) } }
-pipe('find.', 'grep src.zip', 'sorted') // 以下動作確認。jdk1.8.0_121のディレクトリを起点として以下を実行。
-$OUT
-/* 出力結果
- * ./javafx-src.zip
- * ./src.zip
- *
- */

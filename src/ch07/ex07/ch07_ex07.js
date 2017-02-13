@@ -1,9 +1,11 @@
+#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
 // 未完成。
 var ProcessBuilder = java.lang.ProcessBuilder;
 var InputStreamReader = java.io.InputStreamReader
 var BufferedReader = java.io.BufferedReader
 var OutputStreamWriter = java.io.OutputStreamWriter
 var BufferedWriter = java.io.BufferedWriter
+
 function pipe () {
  var ProcessArray = Java.type('java.lang.Process[]');
  var processes = new ProcessArray(arguments.length);
@@ -28,3 +30,7 @@ function pipe () {
 	print(result);
  }
 }
+
+pipe('find .', 'grep src.zip', 'sort') // 以下動作確認
+print($OUT)
+

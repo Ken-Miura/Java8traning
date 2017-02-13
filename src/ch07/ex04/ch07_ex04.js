@@ -1,4 +1,5 @@
-以下はjjsに打ち込んだコマンド
+#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
+
 var StringClass = java.lang.String.class
 var s = 'Javascript'.substring(0, 4)
 print(s.getClass()) // 出力結果: class java.lang.String

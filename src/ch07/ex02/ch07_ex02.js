@@ -1,10 +1,12 @@
-以下jjsに打ち込んだコマンド。インタラクティブな取り組みは、通常のワークフローと比較すると、streamの中間操作から終端操作までを一文で書けないので手間に感じた。
+#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
+
+// インタラクティブな取り組みは、通常のワークフローと比較すると、streamの中間操作から終端操作までを一文で書けないので手間に感じた。
 var String = java.lang.String
 var Files = java.nio.file.Files
 var Paths = java.nio.file.Paths
 var Arrays = java.util.Arrays
 var StandardCharsets = java.nio.charset.StandardCharsets
-var contents = new String(Files.readAllBytes(Paths.get('C:\\workspace_Java8traning\\Java8traning\\src\\ch07\\ex02\\alice.txt')), StandardCharsets.UTF_8)
+var contents = new String(Files.readAllBytes(Paths.get('/home/kmiura/デスクトップ/ch07/ex02/alice.txt')), StandardCharsets.UTF_8)
 var wordStream = Arrays.asList(contents.split(/\W+/)).stream()
 var filteredStream = wordStream.filter(function(s) s.length()>12)
 var distinctStream = filteredStream.distinct()

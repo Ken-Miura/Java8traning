@@ -24,9 +24,9 @@ public final class FindMinimumSeed {
 		
 		Random r = new Random(minSeed.getAsLong());
 		for (long i=0; i<TRIAL_LIMIT; i++) {
-			double result = r.nextDouble();
-			if (result == 0.0) {
+			if (r.nextDouble() == 0.0) {
 				System.out.println("Random.nextDouble returns 0 when trials at " + (i+1));
+				break;
 			}
 		}
 	}

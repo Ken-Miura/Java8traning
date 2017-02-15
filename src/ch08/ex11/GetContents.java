@@ -31,10 +31,7 @@ public final class GetContents {
 		try (InputStream in = connection.getInputStream();
 				InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
 				BufferedReader reader = new BufferedReader(inputStreamReader)) {
-			String line = null;
-			while ((line=reader.readLine()) != null) {
-				System.out.println(line);
-			}
+			reader.lines().forEach(System.out::println);
 		}
 	}
 }

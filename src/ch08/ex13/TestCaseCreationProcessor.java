@@ -22,6 +22,20 @@ import ch08.ex13.TestCase;
 
 public final class TestCaseCreationProcessor extends AbstractProcessor {
 
+	/**以下のような内容が出力される。
+	 * package ch08.ex13;
+	 * public final class Test {
+	 * 	public static void main (String[] args) throws Exception {
+	 * 		if(ch08.ex13.TestedClass.factorial(4) != 24) {
+	 * 			throw new AssertionError();
+	 * 		}
+	 * 		if(ch08.ex13.TestedClass.factorial(0) != 1) {
+	 * 			throw new AssertionError();
+	 * 		}
+	 * 		System.out.println("All the tests passed.");
+	 * 	}
+	 * }
+	 */
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 		for (final TypeElement annotation: annotations) {

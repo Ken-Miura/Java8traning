@@ -1,0 +1,3 @@
+javac TestCase.java TestCases.java TestCaseCreationProcessor.java // TestedClass.java以外をコンパイルする。
+// カレントディレクトリをch08の一つ上のsrcへ移動
+javac -processor ch08.ex13.TestCaseCreationProcessor TestedClass.java // TestedClass.javaを-processorオプションを利用してコンパイルする。結果、Test.javaが作成される。

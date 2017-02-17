@@ -1,6 +1,6 @@
-#!/home/kmiura/java/jdk1.8.0_121/bin/jjs -fx
+// run as "jjs -fx  -- file_path"
 
-/* JavaよりもJavascriptで書くほうが難しい。 
+/* JavaよりもJavascriptで書くほうが難しい。
 　* 出てくる型の種類が多いと、（Javascriptだと変数宣言時にvarしか書かないので）型がわかりづらくなって書きにくくなる。
 　*/
 

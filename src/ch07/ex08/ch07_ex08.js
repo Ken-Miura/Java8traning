@@ -1,4 +1,2 @@
-#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
-
+// run as "jjs -scripting"
 for (entry in $ENV) {print(entry + "->" + $ENV[entry]);}
-

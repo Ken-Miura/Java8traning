@@ -1,5 +1,3 @@
-#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
-
 //[jjs上で試したAPI　>　java.lang.String]
 var s = new java.lang.String("test")
 print(s.length())

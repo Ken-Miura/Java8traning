@@ -1,5 +1,3 @@
-#!/home/kmiura/java/jdk1.8.0_121/bin/jjs
-
 var ArrayList = java.util.ArrayList
 
 function listWithLogging() { var arr = new (Java.extend(ArrayList)) { add: function(x) { print('Adding ' + x); return Java.super(arr).add(x); }  }; return arr; }

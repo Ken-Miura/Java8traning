@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -20,14 +21,16 @@ public final class ScannerUtility {
 	public static Stream<String> words(Scanner scanner) {
 		Objects.requireNonNull(scanner, ()->"scanner must not be null");
 		Iterator<String> iter = new Iterator<String>() {
+			private final Pattern wordPattern = Pattern.compile("[\\P{L}]+");
+			
             @Override
             public boolean hasNext() {
-            	return scanner.hasNext();
+            	return scanner.hasNext(wordPattern);
             }
 
             @Override
             public String next() {
-            	return scanner.next();
+            	return scanner.next(wordPattern);
             }
 		};
 		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
@@ -39,7 +42,7 @@ public final class ScannerUtility {
 		Iterator<String> iter = new Iterator<String>() {
 	            @Override
 	            public boolean hasNext() {
-	            	return scanner.hasNext();
+	            	return scanner.hasNextLine();
 	            }
 
 	            @Override

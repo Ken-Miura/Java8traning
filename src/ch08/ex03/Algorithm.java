@@ -30,7 +30,7 @@ public final class Algorithm {
 		if (b==0) {
 			return a<0? Math.negateExact(a): a;
 		}
-		return euclideanAlgorithmUsingFloorMod(b, rem(a, b));
+		return euclideanAlgorithmUsingRem(b, rem(a, b));
 	}
 	
 	private static int rem(int a, int b) {

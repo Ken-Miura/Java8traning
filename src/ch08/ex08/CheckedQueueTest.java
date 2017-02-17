@@ -13,8 +13,8 @@ public final class CheckedQueueTest {
 	public static void main(String[] args) {
 		try {
 			@SuppressWarnings("rawtypes")
-			Queue queue = new LinkedList<>(); // Stringを入れるキューとして利用
-			Collections.checkedQueue(queue, String.class);
+			Queue queue = new LinkedList(); // Stringを入れるキューとして利用
+			queue = Collections.checkedQueue(queue, String.class);
 			
 			//...
 						

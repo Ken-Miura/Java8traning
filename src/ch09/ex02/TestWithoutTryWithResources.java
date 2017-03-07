@@ -14,7 +14,7 @@ public final class TestWithoutTryWithResources {
 		Scanner scanner = null;
 		PrintWriter printWriter = null;
 		try {
-			scanner = new Scanner(new StringReader("Scanner and PrintWriter without \"try with resources\" test"));
+			scanner = new Scanner(new StringReader("Scanner and PrintWriter test"));
 			StringWriter out = new StringWriter();
 			printWriter = new PrintWriter(out);
 			while(scanner.hasNext()) {

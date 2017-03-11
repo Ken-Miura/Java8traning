@@ -3,7 +3,6 @@
  */
 package ch09.ex10;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 public class LabeledPoint implements Comparable<LabeledPoint> {
@@ -32,19 +31,30 @@ public class LabeledPoint implements Comparable<LabeledPoint> {
 	
 	@Override
 	public int compareTo(LabeledPoint other) {
-		Comparator<LabeledPoint> c = Comparator.comparing(LabeledPoint::getLabel)
-												.thenComparing(LabeledPoint::getX)
-												.thenComparing(LabeledPoint::getY);
-		return c.compare(this, other);
-//		int diffLabel = label.compareTo(other.getLabel());
-//		if (diffLabel != 0) {
-//			return diffLabel;
-//		}
-//		int diffX = Integer.compare(x, other.getX());
-//		if (diffX != 0) {
-//			return diffX;
-//		}
-//		return Integer.compare(y, other.getY());
+		Objects.requireNonNull(other, "other must not be null");
+		if (this.equals(other)) {
+			return 0;
+		}
+		
+		if (label==null && other.getLabel()!=null) {
+			return -1;
+		}
+		if (label!=null && other.getLabel()==null) {
+			return 1;
+		}			
+		if (label!=null && other.getLabel()!=null) {
+			int diffLabel = label.compareTo(other.getLabel());
+			if (diffLabel != 0) {
+				return diffLabel;
+			}
+		}
+		
+		int diffX = Integer.compare(x, other.getX());
+		if (diffX != 0) {
+			return diffX;
+		}
+		
+		return Integer.compare(y, other.getY());
 	}
 	
 	@Override

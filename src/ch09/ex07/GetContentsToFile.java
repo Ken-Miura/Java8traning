@@ -16,13 +16,12 @@ public final class GetContentsToFile {
 		URL url = null;
 		try {
 			url = new URL("https://www.google.co.jp/");
+			try (InputStream in = url.openStream();) {
+				Files.copy(in, Paths.get("output.html"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		
-		try (InputStream in = url.openStream();) {
-			Files.copy(in, Paths.get("output.html"));
-		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
